@@ -71,8 +71,8 @@ Helyi ellenőrzés Maven projekteknél: `./mvnw -B verify`, majd a JaCoCo riport
 1. **Dátumok:** védés időpontja, beadási határidő (a dián még "TODO").
 2. **"Line & branch" értelmezése:** a küszöböt a line és a branch lefedettségnek *külön-külön* kell
    elérnie (javaslat), vagy összevont érték számít?
-3. **Artifactory:** adott-e közös Artifactory (URL, hozzáférés a hallgatóknak), vagy mindenki a saját
-   példányát állítja be? Kettes szintű követelmény, ezért érdemes tisztázni.
+3. **Artifactory:** a referencia-megvalósítás GitHub Packagesbe publikál, mert nincs Artifactory
+   példány. Elfogadható-e ez a hallgatóknak is, vagy kötelező az Artifactory?
 4. **Docker és/vagy SonarQube:** elég az egyik az ötöshöz? (A dia "és / vagy"-t ír.) Kell-e, hogy a
    CI *buildelje* a Docker image-et, vagy elég a Dockerfile megléte?
 5. **Mit tekintünk lefedettségi mérésnek:** a hallgató által beadott JaCoCo riport, vagy az oktató
@@ -86,7 +86,9 @@ A Todo App referencia-megvalósításként használható. Mérés (`./mvnw -B ve
 
 | Szint | Állapot | Indok |
 | --- | --- | --- |
-| Kettes | ⚠️ | Publikus repo, Spring Boot, CI kész; az Artifactory publikálás a CI-ban be van kötve, de csak akkor fut, ha az `ARTIFACTORY_URL` változó és a `ARTIFACTORY_USERNAME` / `ARTIFACTORY_TOKEN` secret be van állítva (még nincs kipróbálva) |
+| Kettes | ✅ | Publikus repo, Spring Boot, CI; a CI a jar-t GitHub Packagesbe publikálja (a `main` push-on, a beépített `GITHUB_TOKEN`-nel) |
 | Hármas | ✅ | Line és branch ≥ 40%, JaCoCo |
 | Négyes | ✅ | Line és branch ≥ 60%, Checkstyle |
 | Ötös | ✅ | Line és branch ≥ 80%, Docker image build a CI-ban |
+
+A GitHub Packages publikálás az első `main` push után ellenőrizhető a repo *Packages* oldalán.

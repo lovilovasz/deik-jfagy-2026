@@ -58,9 +58,8 @@ The agent is attached during tests; `verify` generates the report at
 ## CI
 
 `.github/workflows/ci.yml` runs on pull requests to `main` and pushes to `main`: checkout, Temurin 21
-with Maven cache, `./mvnw -B verify`, builds the Docker image, publishes the jar to Artifactory (pushes to `main` only, and only when the
-repository variable `ARTIFACTORY_URL` and secrets `ARTIFACTORY_USERNAME` / `ARTIFACTORY_TOKEN` are
-set), then uploads the JaCoCo report and `checkstyle-result.xml` as
+with Maven cache, `./mvnw -B verify`, builds the Docker image, publishes the jar to GitHub Packages (pushes to `main` only, using the built-in `GITHUB_TOKEN`),
+then uploads the JaCoCo report and `checkstyle-result.xml` as
 the `quality-reports` artifact. Concurrent runs on the same ref are cancelled.
 
 ## Docker image

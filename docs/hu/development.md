@@ -60,9 +60,8 @@ Az ügynök a tesztek alatt csatlakozik; a `verify` elkészíti a riportot a
 ## CI
 
 A `.github/workflows/ci.yml` a `main`-re irányuló pull requesteken és a `main` push-okon fut: checkout,
-Temurin 21 Maven cache-sel, `./mvnw -B verify`, majd felépíti a Docker image-et, a jar-t publikálja az Artifactoryba (csak `main` push-ra, és csak ha
-az `ARTIFACTORY_URL` repository változó és az `ARTIFACTORY_USERNAME` / `ARTIFACTORY_TOKEN` secretek
-be vannak állítva), majd a JaCoCo riport és a `checkstyle-result.xml`
+Temurin 21 Maven cache-sel, `./mvnw -B verify`, majd felépíti a Docker image-et, a jar-t publikálja a GitHub Packagesbe (csak `main` push-ra, a beépített
+`GITHUB_TOKEN`-nel), majd a JaCoCo riport és a `checkstyle-result.xml`
 feltöltése `quality-reports` artifactként. Ugyanarra a ref-re induló párhuzamos futások megszakadnak.
 
 ## Docker image
