@@ -9,44 +9,50 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/** Business logic for todos. */
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class TodoService {
 
-	private final TodoRepository repository;
-	private final PersonService personService;
+  private final TodoRepository repository;
+  private final PersonService personService;
 
-	public Todo create(TodoRequest req) {
-		Todo t = new Todo();
-		apply(t, req);
-		return repository.save(t);
-	}
+  /** Creates a todo for an existing person. */
+  public Todo create(TodoRequest req) {
+    Todo t = new Todo();
+    apply(t, req);
+    return repository.save(t);
+  }
 
-	@Transactional(readOnly = true)
-	public List<Todo> findAll(Long personId) {
-		return personId == null ? repository.findAll() : repository.findByPersonId(personId);
-	}
+  /** Returns all todos, optionally filtered by person. */
+  @Transactional(readOnly = true)
+  public List<Todo> findAll(Long personId) {
+    return personId == null ? repository.findAll() : repository.findByPersonId(personId);
+  }
 
-	@Transactional(readOnly = true)
-	public Todo get(Long id) {
-		return repository.findById(id).orElseThrow(() -> new NotFoundException("Todo", id));
-	}
+  /** Returns a todo or fails with 404. */
+  @Transactional(readOnly = true)
+  public Todo get(Long id) {
+    return repository.findById(id).orElseThrow(() -> new NotFoundException("Todo", id));
+  }
 
-	public Todo update(Long id, TodoRequest req) {
-		Todo t = get(id);
-		apply(t, req);
-		return t;
-	}
+  /** Updates a todo. */
+  public Todo update(Long id, TodoRequest req) {
+    Todo t = get(id);
+    apply(t, req);
+    return t;
+  }
 
-	public void delete(Long id) {
-		repository.delete(get(id));
-	}
+  /** Deletes a todo. */
+  public void delete(Long id) {
+    repository.delete(get(id));
+  }
 
-	private void apply(Todo t, TodoRequest req) {
-		t.setTitle(req.title());
-		t.setDescription(req.description());
-		t.setCompleted(Boolean.TRUE.equals(req.completed()));
-		t.setPerson(personService.get(req.personId()));
-	}
+  private void apply(Todo t, TodoRequest req) {
+    t.setTitle(req.title());
+    t.setDescription(req.description());
+    t.setCompleted(Boolean.TRUE.equals(req.completed()));
+    t.setPerson(personService.get(req.personId()));
+  }
 }

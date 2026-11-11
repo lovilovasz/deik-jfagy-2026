@@ -4,6 +4,8 @@ Demo Spring Boot 4 / Java 21 REST app: `Person` (1) —— (N) `Todo`, full CRUD
 
 ## Commands
 - Build + test: `./mvnw -B verify` (tests use in-memory H2, no Docker needed)
+- Style only: `./mvnw -B checkstyle:check` (Google Java style, 2-space indent; any violation fails the build)
+- Coverage: `verify` fails if overall line coverage is below 80%; report at `target/site/jacoco/index.html`
 - Run everything (db + app): `docker compose up -d --build` → http://localhost:8080
 - Run only the DB for local dev: `docker compose up -d db`, then `./mvnw spring-boot:run`
 - Swagger UI: http://localhost:8080/swagger-ui.html
