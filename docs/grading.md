@@ -81,14 +81,12 @@ Helyi ellenőrzés Maven projekteknél: `./mvnw -B verify`, majd a JaCoCo riport
 
 ## Példa: a repository saját állapota
 
-Ez a Todo App referencia-megvalósításként használható. Mérés (2026-11-11, `./mvnw -B verify`):
+A Todo App referencia-megvalósításként használható. Mérés (`./mvnw -B verify`): line 97,3%, branch
+100%; a JaCoCo kapu a line **és** a branch lefedettséget is 80%-on tartja.
 
 | Szint | Állapot | Indok |
 | --- | --- | --- |
-| Kettes | ⚠️ | Publikus repo, Spring Boot, CI megvan; **Artifactory publikálás nincs** |
-| Hármas | ❌ | Line 82,4% ✅, de **branch 37,5%** < 40% |
-| Négyes | ❌ | Branch 37,5% < 60%; Checkstyle és JaCoCo megvan |
-| Ötös | ❌ | Branch 37,5% < 80%; Dockerfile/compose megvan, de a CI nem építi |
-
-Megjegyzés: a projekt JaCoCo kapuja jelenleg csak a *line* lefedettséget ellenőrzi (80%), a *branch*
-lefedettséget nem.
+| Kettes | ⚠️ | Publikus repo, Spring Boot, CI kész; az Artifactory publikálás a CI-ban be van kötve, de csak akkor fut, ha az `ARTIFACTORY_URL` változó és a `ARTIFACTORY_USERNAME` / `ARTIFACTORY_TOKEN` secret be van állítva (még nincs kipróbálva) |
+| Hármas | ✅ | Line és branch ≥ 40%, JaCoCo |
+| Négyes | ✅ | Line és branch ≥ 60%, Checkstyle |
+| Ötös | ✅ | Line és branch ≥ 80%, Docker image build a CI-ban |

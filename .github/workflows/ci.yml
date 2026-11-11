@@ -25,11 +25,26 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: maven
+          server-id: artifactory
+          server-username: ARTIFACTORY_USERNAME
+          server-password: ARTIFACTORY_TOKEN
 
       - name: Verify (tests use in-memory H2)
         run: |
           chmod +x mvnw
           ./mvnw -B verify
+
+      - name: Build Docker image
+        run: docker build -t todo-app:${{ github.sha }} .
+
+      - name: Publish artifact to Artifactory
+        # Runs on pushes to main once the repository variable ARTIFACTORY_URL and the
+        # secrets ARTIFACTORY_USERNAME / ARTIFACTORY_TOKEN are configured.
+        if: github.event_name == 'push' && vars.ARTIFACTORY_URL != ''
+        env:
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
+        run: ./mvnw -B deploy -DskipTests -DaltDeploymentRepository=artifactory::${{ vars.ARTIFACTORY_URL }}
 
       - name: Upload style and coverage reports
         if: always()
