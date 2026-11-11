@@ -52,13 +52,14 @@ violations rather than suppressing them.
 ## Coverage (JaCoCo)
 
 The agent is attached during tests; `verify` generates the report at
-`target/site/jacoco/index.html` and fails if overall line coverage is below **80%**
+`target/site/jacoco/index.html` and fails if overall **line or branch** coverage is below **80%**
 (property `coverage.minimum` in `pom.xml`).
 
 ## CI
 
 `.github/workflows/ci.yml` runs on pull requests to `main` and pushes to `main`: checkout, Temurin 21
-with Maven cache, `./mvnw -B verify`, then uploads the JaCoCo report and `checkstyle-result.xml` as
+with Maven cache, `./mvnw -B verify`, builds the Docker image, publishes the jar to GitHub Packages (pushes to `main` only, using the built-in `GITHUB_TOKEN`),
+then uploads the JaCoCo report and `checkstyle-result.xml` as
 the `quality-reports` artifact. Concurrent runs on the same ref are cancelled.
 
 ## Docker image

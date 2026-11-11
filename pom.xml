@@ -185,6 +185,11 @@
 											<value>COVEREDRATIO</value>
 											<minimum>${coverage.minimum}</minimum>
 										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>${coverage.minimum}</minimum>
+										</limit>
 									</limits>
 								</rule>
 							</rules>

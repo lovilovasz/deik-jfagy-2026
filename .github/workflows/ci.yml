@@ -12,6 +12,7 @@ concurrency:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   build:
@@ -25,11 +26,25 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
       - name: Verify (tests use in-memory H2)
         run: |
           chmod +x mvnw
           ./mvnw -B verify
+
+      - name: Build Docker image
+        run: docker build -t todo-app:${{ github.sha }} .
+
+      - name: Publish artifact to GitHub Packages
+        # Pushes to main only; uses the built-in GITHUB_TOKEN, no extra secrets needed.
+        if: github.event_name == 'push'
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./mvnw -B deploy -DskipTests -DaltDeploymentRepository=github::https://maven.pkg.github.com/${{ github.repository }}
 
       - name: Upload style and coverage reports
         if: always()

@@ -54,13 +54,14 @@ is – megbuktatja a buildet. A hibákat javítani kell, nem elnyomni.
 ## Lefedettség (JaCoCo)
 
 Az ügynök a tesztek alatt csatlakozik; a `verify` elkészíti a riportot a
-`target/site/jacoco/index.html` helyen, és elbukik, ha az összesített sorlefedettség **80%** alatt van
+`target/site/jacoco/index.html` helyen, és elbukik, ha az összesített sor- (line) vagy elágazás- (branch) lefedettség **80%** alatt van
 (`coverage.minimum` property a `pom.xml`-ben).
 
 ## CI
 
 A `.github/workflows/ci.yml` a `main`-re irányuló pull requesteken és a `main` push-okon fut: checkout,
-Temurin 21 Maven cache-sel, `./mvnw -B verify`, majd a JaCoCo riport és a `checkstyle-result.xml`
+Temurin 21 Maven cache-sel, `./mvnw -B verify`, majd felépíti a Docker image-et, a jar-t publikálja a GitHub Packagesbe (csak `main` push-ra, a beépített
+`GITHUB_TOKEN`-nel), majd a JaCoCo riport és a `checkstyle-result.xml`
 feltöltése `quality-reports` artifactként. Ugyanarra a ref-re induló párhuzamos futások megszakadnak.
 
 ## Docker image
