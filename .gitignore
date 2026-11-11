@@ -31,3 +31,37 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Secrets / environment ###
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+### Logs & runtime ###
+*.log
+logs/
+*.pid
+hs_err_pid*
+
+### OS ###
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### Maven ###
+.mvn/wrapper/maven-wrapper.jar
+dependency-reduced-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+
+### Claude Code (personal/local only; shared .claude/ skills and settings.json stay tracked) ###
+.claude/settings.local.json
+.claude/worktrees/
+CLAUDE.local.md
+
+### Docker ###
+docker-compose.override.yml
+compose.override.yaml
