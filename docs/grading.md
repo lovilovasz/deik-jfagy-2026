@@ -6,6 +6,20 @@ teljesül.
 
 Jelölés: `____` = az oktató által még kitöltendő döntés / dátum (lásd a "Nyitott döntések" részt).
 
+## Határidők és védés
+
+| Védés napja | Utolsó commit / repository link határideje |
+| --- | --- |
+| **2026. december 2.** (szerda), opcionális | **2026. november 30.**, hétfő 23:59:59 |
+| **2026. december 9.** (szerda), utolsó védési nap | **2026. december 7.**, hétfő 23:59:59 |
+
+- A védés legkésőbb **december 9-én** zajlik, ez az utolsó nap.
+- Aki szeretné, védhet már **december 2-án** is; rá is ugyanez a szabály vonatkozik: az utolsó
+  commitnak a védést megelőző hétfő éjfélig be kell érkeznie.
+- A szükséges adatokat (név, repository link, választott védési nap) a közös
+  [Google Sheets táblázatban](https://docs.google.com/spreadsheets/d/1Oz4OuvO_KP5pZNG96tVf6qWYZiceicKYGrlurArbJMk/edit?usp=sharing)
+  kell kitölteni.
+
 ## Számonkérés formája
 
 | Elem | Leírás |
@@ -24,10 +38,11 @@ Jelölés: `____` = az oktató által még kitöltendő döntés / dátum (lásd
 ### Kettes
 
 - [ ] Önálló munka; a hallgató érti és el tudja magyarázni a működést (védésen igazolja)
-- [ ] Védés időpontja: `____`
+- [ ] Védés időpontja: **2026. december 2.** (opcionális, korai védés) vagy **2026. december 9.** (utolsó védési nap)
 - [ ] Verziókövetett szoftver, **publikus GitHub repository**
-- [ ] Repository link elküldve a határidőig: `____` (23:59:59)
-- [ ] A határidő utáni módosításokat nem vesszük figyelembe (ellenőrzés: utolsó commit ideje)
+- [ ] Repository link elküldve a határidőig (23:59:59): **december 9-i védés esetén 2026. december 7., hétfő éjfél; december 2-i védés esetén 2026. november 30., hétfő éjfél**
+- [ ] A határidő utáni módosításokat nem vesszük figyelembe (ellenőrzés: utolsó commit ideje; az utolsó commit a védést megelőző hétfő éjfélig kell beérkezzen)
+- [ ] A kötelező adatok (név, repository link, választott védési nap stb.) kitöltve a közös táblázatban: [Adatlap (Google Sheets)](https://docs.google.com/spreadsheets/d/1Oz4OuvO_KP5pZNG96tVf6qWYZiceicKYGrlurArbJMk/edit?usp=sharing)
 - [ ] Spring Boot webes alkalmazás
 - [ ] CI pipeline build konfigurálva
 - [ ] Az új verzió artifactja elérhető az **Artifactoryban** a CI build után
@@ -68,7 +83,7 @@ Helyi ellenőrzés Maven projekteknél: `./mvnw -B verify`, majd a JaCoCo riport
 
 ## Nyitott döntések (az oktatóra vár)
 
-1. **Dátumok:** védés időpontja, beadási határidő (a dián még "TODO").
+1. ~~**Dátumok**~~ – eldöntve, lásd a "Határidők és védés" részt.
 2. **"Line & branch" értelmezése:** a küszöböt a line és a branch lefedettségnek *külön-külön* kell
    elérnie (javaslat), vagy összevont érték számít?
 3. **Artifactory:** a referencia-megvalósítás GitHub Packagesbe publikál, mert nincs Artifactory
